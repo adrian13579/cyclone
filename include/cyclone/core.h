@@ -73,7 +73,7 @@ namespace cyclone {
                 return *this;
             }
 
-            void AddScaledVector(const Vector3& vector, real scale)
+            void addScaledVector(const Vector3& vector, real scale)
             {
                 x += vector.x * scale;
                 y += vector.y * scale;
