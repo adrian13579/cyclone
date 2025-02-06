@@ -5,10 +5,10 @@ CXX = g++
 CXXFLAGS = -Wall -std=c++11
 
 # Include directories
-INCLUDES = -I./include
+INCLUDES = -I./include -I./src/demos/fireworks
 
 # Source files
-SRCS = $(wildcard src/*.cpp)
+SRCS = $(wildcard src/*.cpp src/demos/**/*.cpp)
 
 # Object files
 OBJS = $(SRCS:.cpp=.o)
@@ -21,7 +21,7 @@ all: $(EXEC)
 
 # Link the executable
 $(EXEC): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+	$(CXX) $(CXXFLAGS) -o $@ $^ -lglut -lGLEW -lGL 
 
 # Compile source files into object files
 %.o: %.cpp
