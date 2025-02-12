@@ -1,5 +1,6 @@
 #include "../include/cyclone/core.h"
 #include "../include/triangle_program.h"
+#include "../include/graphics/matrix4.h"
 
 using namespace demo;
 
@@ -29,6 +30,27 @@ void TriangleProgram::Display() {
     glClear(GL_COLOR_BUFFER_BIT);
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
+
+    if(scaleLocation == 0) {
+        scaleLocation = glGetUniformLocation(shaderProgram, "scale");
+    }
+
+    static float scale = 0.0f;
+    static float delta = 0.0001f;
+    scale += delta;
+    if(scale >= 1.0f || scale <= 0.0f) {
+        delta = -delta;
+    }
+    glUniform1f(scaleLocation, scale);
+
+    static GLuint matrixLocation;
+    if(matrixLocation == 0){
+        matrixLocation = glGetUniformLocation(shaderProgram, "translation");
+    }
+
+    graphics::Matrix4 translationMatrix = graphics::Matrix4::Translation(scale*2, scale, 0.0f);
+
+    glUniformMatrix4fv(matrixLocation, 1, GL_TRUE, &translationMatrix[0][0]);
 
     const GLsizei stride = sizeof(cyclone::Vector3);
 

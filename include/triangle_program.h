@@ -40,5 +40,6 @@ namespace demo {
 
     private:
         GLuint vbo; ///< Vertex buffer object for the triangle.
+        GLuint scaleLocation; ///< Location of the scale uniform in the shader program.
     };
 }

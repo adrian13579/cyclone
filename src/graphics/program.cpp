@@ -69,7 +69,7 @@ void OpenGLProgram::AttachShader(GLuint shaderProgram, const char* pShaderText, 
 }
 
 void OpenGLProgram::CompileShaders() {
-    GLuint shaderProgram = glCreateProgram();
+    shaderProgram = glCreateProgram();
 
     if(shaderProgram == 0) {
         fprintf(stderr, "Error creating shader program\n");
@@ -104,6 +104,7 @@ void OpenGLProgram::CompileShaders() {
         fprintf(stderr, "Invalid shader program: '%s'\n", errorLog);
         exit(1);
     }
+
 
     glUseProgram(shaderProgram);
 }

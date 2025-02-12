@@ -103,5 +103,7 @@ namespace graphics {
         * @brief A vector to store vertex array buffer objects.
         */
         std::vector<GLuint> vertexArrayBuffers; ///< A vector to store vertex array buffer objects.
+
+        GLuint shaderProgram; ///< Shader program for the triangle.
     };
 }

@@ -12,7 +12,7 @@ void initGlut(int argc, char** argv) {
 
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 
-    int width = 800, height = 600;
+    int width = 1500, height = 1000;
     glutInitWindowSize(width, height);
 
     glutInitWindowPosition(200, 100);
