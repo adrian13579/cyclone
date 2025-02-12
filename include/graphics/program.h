@@ -97,13 +97,13 @@ namespace graphics {
         /**
         * @brief A map to store the shaders.
         */
-        std::unordered_map<std::string, GLenum> shaders; ///< An unordered map to store the shaders.
+        std::unordered_map<std::string, GLenum> m_shaders; ///< Renamed from shaders
 
         /**
         * @brief A vector to store vertex array buffer objects.
         */
-        std::vector<GLuint> vertexArrayBuffers; ///< A vector to store vertex array buffer objects.
+        std::vector<GLuint> m_vertexArrayBuffers; ///< Renamed from vertexArrayBuffers
 
-        GLuint shaderProgram; ///< Shader program for the triangle.
+        GLuint m_shaderProgram; ///< Renamed from shaderProgram
     };
 }

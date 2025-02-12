@@ -14,7 +14,7 @@ namespace graphics {
      */
     class Matrix4 {
         public:
-            real data[4][4]; ///< 4x4 array storing the matrix elements.
+            real m_data[4][4]; ///< 4x4 array storing the matrix elements.
 
             /**
              * @brief Default constructor.
@@ -91,5 +91,17 @@ namespace graphics {
              * @return A Matrix4 for the translation.
              */
             static Matrix4 Translation(real x, real y, real z);
+
+            /**
+            * @brief Creates a rotation matrix.
+            * 
+            * Generates a matrix representing a rotation transformation.
+            *
+            * @param angle The angle of rotation in degrees.
+            * @param x The x-component of the rotation axis.
+            * @param y The y-component of the rotation axis.
+            * @param z The z-component of the rotation axis.
+            */
+            static Matrix4 Rotation(real angle, real x, real y, real z);
     };
 }

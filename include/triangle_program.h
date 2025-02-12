@@ -1,4 +1,3 @@
-
 #include "../include/graphics/program.h"
 
 namespace demo {
@@ -39,7 +38,7 @@ namespace demo {
         void CreateVertexBuffer() override;
 
     private:
-        GLuint vbo; ///< Vertex buffer object for the triangle.
-        GLuint scaleLocation; ///< Location of the scale uniform in the shader program.
+        GLuint m_vbo; ///< Renamed from vbo
+        GLuint m_scaleLocation; ///< Renamed from scaleLocation
     };
 }

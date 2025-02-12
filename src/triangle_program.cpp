@@ -21,18 +21,18 @@ void TriangleProgram::CreateVertexBuffer() {
     vertices[1] = cyclone::Vector3(-1.0f, -1.0f, 0.0f); // Vertex 2
     vertices[2] = cyclone::Vector3(1.0f, -1.0f, 0.0f);  // Vertex 3
 
-    glGenBuffers(1, &vbo);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glGenBuffers(1, &m_vbo); // Updated to m_vbo
+    glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 }
 
 void TriangleProgram::Display() {
     glClear(GL_COLOR_BUFFER_BIT);
 
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, m_vbo); // Updated to m_vbo
 
-    if(scaleLocation == 0) {
-        scaleLocation = glGetUniformLocation(shaderProgram, "scale");
+    if(m_scaleLocation == 0) { // Updated to m_scaleLocation
+        m_scaleLocation = glGetUniformLocation(m_shaderProgram, "scale"); // m_shaderProgram from base class
     }
 
     static float scale = 0.0f;
@@ -41,11 +41,11 @@ void TriangleProgram::Display() {
     if(scale >= 1.0f || scale <= 0.0f) {
         delta = -delta;
     }
-    glUniform1f(scaleLocation, scale);
+    glUniform1f(m_scaleLocation, scale); // Updated to m_scaleLocation
 
     static GLuint matrixLocation;
     if(matrixLocation == 0){
-        matrixLocation = glGetUniformLocation(shaderProgram, "translation");
+        matrixLocation = glGetUniformLocation(m_shaderProgram, "translation");
     }
 
     graphics::Matrix4 translationMatrix = graphics::Matrix4::Translation(scale*2, scale, 0.0f);

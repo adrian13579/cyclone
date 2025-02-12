@@ -69,46 +69,46 @@ void OpenGLProgram::AttachShader(GLuint shaderProgram, const char* pShaderText, 
 }
 
 void OpenGLProgram::CompileShaders() {
-    shaderProgram = glCreateProgram();
+    m_shaderProgram = glCreateProgram();
 
-    if(shaderProgram == 0) {
+    if(m_shaderProgram == 0) {
         fprintf(stderr, "Error creating shader program\n");
         exit(1);
     }
 
     std::string content;
-    for(auto& shader : shaders) {
+    for(auto& shader : m_shaders) {
         if(!ReadFile(shader.first.c_str(), content)) {
             std::cerr << "Error reading file: " << shader.first << std::endl;
             exit(1);
         }
-        AttachShader(shaderProgram, content.c_str(), shader.second);
+        AttachShader(m_shaderProgram, content.c_str(), shader.second);
     }
 
     GLint success = 0;
     GLchar errorLog[1024] = {0};
 
-    glLinkProgram(shaderProgram);
+    glLinkProgram(m_shaderProgram);
 
-    glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
+    glGetProgramiv(m_shaderProgram, GL_LINK_STATUS, &success);
     if(success == 0) {
-        glGetProgramInfoLog(shaderProgram, sizeof(errorLog), NULL, errorLog);
+        glGetProgramInfoLog(m_shaderProgram, sizeof(errorLog), NULL, errorLog);
         fprintf(stderr, "Error linking shader program: '%s'\n", errorLog);
         exit(1);
     }
 
-    glValidateProgram(shaderProgram);
-    glGetProgramiv(shaderProgram, GL_VALIDATE_STATUS, &success);
+    glValidateProgram(m_shaderProgram);
+    glGetProgramiv(m_shaderProgram, GL_VALIDATE_STATUS, &success);
     if(!success) {
-        glGetProgramInfoLog(shaderProgram, sizeof(errorLog), NULL, errorLog);
+        glGetProgramInfoLog(m_shaderProgram, sizeof(errorLog), NULL, errorLog);
         fprintf(stderr, "Invalid shader program: '%s'\n", errorLog);
         exit(1);
     }
 
 
-    glUseProgram(shaderProgram);
+    glUseProgram(m_shaderProgram);
 }
 
 void OpenGLProgram::AddShader(const std::string& pathToShader, GLenum shaderType) {
-    shaders[pathToShader] = shaderType;
+    m_shaders[pathToShader] = shaderType;
 }
