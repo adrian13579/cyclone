@@ -103,5 +103,12 @@ namespace graphics {
             * @param z The z-component of the rotation axis.
             */
             static Matrix4 Rotation(real angle, real x, real y, real z);
+
+            /**
+             * @brief Creates an identity matrix.
+             *
+             * Creates an identity matrix.
+             */
+            static Matrix4 Identity();
     };
 }

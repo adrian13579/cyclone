@@ -1,4 +1,5 @@
 #include "../../include/graphics/matrix4.h"
+#include <cmath>
 
 namespace graphics {
     Matrix4::Matrix4() {
@@ -56,6 +57,47 @@ namespace graphics {
             {0.0f, 0.0f, 0.0f, 1.0f}
         };
 
+        return Matrix4(temp);
+    }
+
+    Matrix4 Matrix4::Rotation(real angle, real x, real y, real z) {
+
+        real temp[4][4] = {0};
+        if(x == 1) {
+            temp[0][0] = 1.0f; temp[0][1] = 0.0f; temp[0][2] = 0.0f; temp[0][3] = 0.0f;
+            temp[1][0] = 0.0f; temp[1][1] = cosf(angle); temp[1][2] = -1 * sinf(angle); temp[1][3] = 0.0f;
+            temp[2][0] = 0.0f; temp[2][1] = sinf(angle); temp[2][2] = cosf(angle); temp[2][3] = 0.0f;
+            temp[3][0] = 0.0f; temp[3][1] = 0.0f; temp[3][2] = 0.0f; temp[3][3] = 1.0f;
+
+            return Matrix4(temp);
+        } 
+        if(y == 1){
+            temp[0][0] = cosf(angle); temp[0][1] = 0.0f; temp[0][2] = sinf(angle); temp[0][3] = 0.0f;
+            temp[1][0] = 0.0f; temp[1][1] = 1.0f; temp[1][2] = 0.0f; temp[1][3] = 0.0f;
+            temp[2][0] = -1 * sinf(angle); temp[2][1] = 0.0f; temp[2][2] = cosf(angle); temp[2][3] = 0.0f;
+            temp[3][0] = 0.0f; temp[3][1] = 0.0f; temp[3][2] = 0.0f; temp[3][3] = 1.0f;
+
+            return Matrix4(temp);
+        }
+        if(z == 1) {
+            temp[0][0] = cosf(angle); temp[0][1] = -1 * sinf(angle); temp[0][2] = 0.0f; temp[0][3] = 0.0f;
+            temp[1][0] = sinf(angle); temp[1][1] = cosf(angle); temp[1][2] = 0.0f; temp[1][3] = 0.0f;
+            temp[2][0] = 0.0f; temp[2][1] = 0.0f; temp[2][2] = 1.0f; temp[2][3] = 0.0f;
+            temp[3][0] = 0.0f; temp[3][1] = 0.0f; temp[3][2] = 0.0f; temp[3][3] = 1.0f;
+
+            return Matrix4(temp);
+        }
+        // If none of the above conditions are met, return the identity matrix.
+        return Matrix4::Identity();
+    }
+
+    Matrix4 Matrix4::Identity() {
+        real temp[4][4] = {
+            {1.0f, 0.0f, 0.0f, 0.0f},
+            {0.0f, 1.0f, 0.0f, 0.0f},
+            {0.0f, 0.0f, 1.0f, 0.0f},
+            {0.0f, 0.0f, 0.0f, 1.0f}
+        };
         return Matrix4(temp);
     }
 }
