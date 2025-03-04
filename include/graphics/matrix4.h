@@ -81,6 +81,15 @@ namespace graphics {
             const real* operator[](int row) const;
 
             /**
+             * @brief Multiplies two matrices.
+             *
+             * Multiplies two 4x4 matrices together.
+             * @param other The matrix to multiply by.
+             * @return The product of the two matrices.
+             */
+            Matrix4 operator*(const Matrix4& other) const;
+
+            /**
              * @brief Creates a translation matrix.
              *
              * Generates a matrix representing a translation transformation.
@@ -97,7 +106,7 @@ namespace graphics {
             * 
             * Generates a matrix representing a rotation transformation.
             *
-            * @param angle The angle of rotation in degrees.
+            * @param angle The angle of rotation in radians.
             * @param x The x-component of the rotation axis.
             * @param y The y-component of the rotation axis.
             * @param z The z-component of the rotation axis.
@@ -110,5 +119,17 @@ namespace graphics {
              * Creates an identity matrix.
              */
             static Matrix4 Identity();
+
+            /**
+             * @brief Creates a scaling matrix.
+             *
+             * Generates a matrix representing a scaling transformation.
+             *
+             * @param x Scaling factor along the x-axis.
+             * @param y Scaling factor along the y-axis.
+             * @param z Scaling factor along the z-axis.
+             * @return A Matrix4 for the scaling.
+             */
+            static Matrix4 Scale(real x, real y, real z);
     };
 }

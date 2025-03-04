@@ -2,9 +2,8 @@
 
 layout(location = 0) in vec3 Position;
 
-uniform float scale;
-uniform mat4 translation;
+uniform mat4 transformation;
 
 void main() {
-    gl_Position = translation *vec4( scale* Position.x, Position.y, Position.z, 1.0);
+    gl_Position = transformation * vec4( Position.x, Position.y, Position.z, 1.0);
 }

@@ -40,5 +40,6 @@ namespace demo {
     private:
         GLuint m_vbo; ///< Renamed from vbo
         GLuint m_scaleLocation; ///< Renamed from scaleLocation
+        GLuint m_transformation;
     };
 }

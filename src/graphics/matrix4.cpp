@@ -100,4 +100,26 @@ namespace graphics {
         };
         return Matrix4(temp);
     }
+
+    Matrix4 Matrix4::Scale(real x, real y, real z) {
+        real temp[4][4] = {
+            {x, 0.0f, 0.0f, 0.0f},
+            {0.0f, y, 0.0f, 0.0f},
+            {0.0f, 0.0f, z, 0.0f},
+            {0.0f, 0.0f, 0.0f, 1.0f}
+        };
+        return Matrix4(temp);
+    }
+
+    Matrix4 Matrix4::operator*(const Matrix4& m) const {
+        real temp[4][4] = {0};
+        for(int i = 0; i < 4; i++) {
+            for(int j = 0; j < 4; j++) {
+                for(int k = 0; k < 4; k++) {
+                    temp[i][j] += m_data[i][k] * m[k][j];
+                }
+            }
+        }
+        return Matrix4(temp);
+    }
 }

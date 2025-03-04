@@ -31,26 +31,28 @@ void TriangleProgram::Display() {
 
     glBindBuffer(GL_ARRAY_BUFFER, m_vbo); // Updated to m_vbo
 
-    if(m_scaleLocation == 0) { // Updated to m_scaleLocation
-        m_scaleLocation = glGetUniformLocation(m_shaderProgram, "scale"); // m_shaderProgram from base class
+    m_transformation = glGetUniformLocation(m_shaderProgram, "transformation");
+
+    static float angle = 2.0f;
+    static float delta = 0.01f;
+    if(angle > 360.0f) {
+        angle = 0.0f;
     }
+    angle += delta;
 
-    static float scale = 0.0f;
-    static float delta = 0.0001f;
-    scale += delta;
-    if(scale >= 1.0f || scale <= 0.0f) {
-        delta = -delta;
+    static float scale = 0.01f;
+    static float scaleDelta = 0.001f;
+    if(scale > 1.0f || scale < -1.0f) {
+        scaleDelta *= -1 ;
     }
-    glUniform1f(m_scaleLocation, scale); // Updated to m_scaleLocation
+    scale+=scaleDelta;
 
-    static GLuint matrixLocation;
-    if(matrixLocation == 0){
-        matrixLocation = glGetUniformLocation(m_shaderProgram, "translation");
-    }
+    graphics::Matrix4 scaleMatrix = graphics::Matrix4::Scale(scale,scale,scale);
+    graphics::Matrix4 rotationMatrix = graphics::Matrix4::Rotation(angle,1,0,0);
 
-    graphics::Matrix4 translationMatrix = graphics::Matrix4::Translation(scale*2, scale, 0.0f);
+    graphics::Matrix4 transformationMatrix = scaleMatrix * rotationMatrix;
 
-    glUniformMatrix4fv(matrixLocation, 1, GL_TRUE, &translationMatrix[0][0]);
+    glUniformMatrix4fv(m_transformation, 1, GL_TRUE, &transformationMatrix[0][0]);
 
     const GLsizei stride = sizeof(cyclone::Vector3);
 
