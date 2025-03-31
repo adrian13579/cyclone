@@ -2,22 +2,23 @@
 #include <GL/freeglut.h>
 #include <cstdio>
 
-#include "../include/cyclone/core.h"
-#include "../include/triangle_program.h"
+#include "../include/cube_program.h"
 
-static demo::TriangleProgram program;
+static demo::CubeProgram program;
 
 void initGlut(int argc, char** argv) {
     glutInit(&argc, argv);
 
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 
-    int width = 1500, height = 1000;
+    int width =800, height = 500;
     glutInitWindowSize(width, height);
 
     glutInitWindowPosition(200, 100);
 
     glutCreateWindow("OpenGL Window");
+
+    program = demo::CubeProgram(width, height);
 
     GLenum res = glewInit();
     if (res != GLEW_OK) {
@@ -25,7 +26,12 @@ void initGlut(int argc, char** argv) {
         return ;
     }
 
-    glClearColor(0, 0, 0, 0);
+    GLclampf Red = 0.0f, Green = 0.0f, Blue = 0.0f, Alpha = 0.0f;
+    glClearColor(Red, Green, Blue, Alpha);
+
+    glEnable(GL_CULL_FACE);
+    glFrontFace(GL_CW);
+    glCullFace(GL_BACK);
 }
 
 

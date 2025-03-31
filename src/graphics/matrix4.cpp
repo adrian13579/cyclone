@@ -53,7 +53,7 @@ namespace graphics {
         real temp[4][4] = {
             {1.0f, 0.0f, 0.0f, x},
             {0.0f, 1.0f, 0.0f, y},
-            {0.0f, 0.0f, 1.0f, z},
+            {0.0f, 0.0f, 1.0f, 1},
             {0.0f, 0.0f, 0.0f, 1.0f}
         };
 
@@ -121,5 +121,32 @@ namespace graphics {
             }
         }
         return Matrix4(temp);
+    }
+
+    Matrix4 Matrix4::PerspectiveProjection(radian fov, real aspectRatio, real nearPlane, real farPlane) {
+
+        float tanHalfFov = tanf(fov / 2.0f);
+        float f = 1.0f / tanHalfFov;
+
+        float zRange = nearPlane - farPlane;
+
+        float a = (-nearPlane - farPlane) / zRange;
+        float b = (2.0f * nearPlane * farPlane) / zRange;
+
+        real temp[4][4] = {
+            {f/aspectRatio, 0.0f, 0.0f, 0.0f},
+            {0.0f, f, 0.0f, 0.0f},
+            {0.0f, 0.0f, a, b},
+            {0.0f, 0.0f, 1,0}
+        };
+
+        //return Matrix4(
+            //f/aspectRatio, 0.0f, 0.0f, 0.0f,
+            //0.0f, f, 0.0f, 0.0f,
+            //0.0f, 0.0f, 1, 1,
+            //0.0f, 0.0f, 0, 0
+        //);
+
+       return Matrix4(temp);
     }
 }

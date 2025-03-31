@@ -2,8 +2,9 @@
 
 layout(location = 0) in vec3 Position;
 
-uniform mat4 transformation;
 out vec4 Color;
+
+uniform mat4 transform;
 
 const vec4 colors[3] = vec4[3](
     vec4(1, 0, 0, 1),
@@ -12,6 +13,6 @@ const vec4 colors[3] = vec4[3](
 );
 
 void main() {
-    gl_Position = transformation * vec4( Position.x, Position.y, Position.z, 1.0);
-    Color = colors[gl_VertexID];
+    gl_Position = transform * vec4( Position.x, Position.y, Position.z, 1);
+    Color = colors[gl_VertexID % 3];
 }

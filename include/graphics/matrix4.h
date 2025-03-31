@@ -131,5 +131,19 @@ namespace graphics {
              * @return A Matrix4 for the scaling.
              */
             static Matrix4 Scale(real x, real y, real z);
+
+
+            /**
+             * @brief Creates a perspective projection matrix.
+             *
+             * Generates a matrix for perspective projection.
+             *
+             * @param fov Field of view in radians.
+             * @param aspectRatio Aspect ratio of the viewport.
+             * @param nearPlane Distance to the near clipping plane.
+             * @param farPlane Distance to the far clipping plane.
+             * @return A Matrix4 for the perspective projection.
+             */
+            static Matrix4 PerspectiveProjection(radian fov, real aspcectRatio, real nearPlane, real farPlane);
     };
 }
