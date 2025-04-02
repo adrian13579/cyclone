@@ -140,13 +140,16 @@ namespace graphics {
             {0.0f, 0.0f, 1,0}
         };
 
-        //return Matrix4(
-            //f/aspectRatio, 0.0f, 0.0f, 0.0f,
-            //0.0f, f, 0.0f, 0.0f,
-            //0.0f, 0.0f, 1, 1,
-            //0.0f, 0.0f, 0, 0
-        //);
-
        return Matrix4(temp);
+    }
+
+    Matrix4 Matrix4::Camera(Vector3 position, Vector3 u, Vector3 v, Vector3 n){
+        real temp[4][4] = {
+            {u.x, u.y, u.z, -position.x},
+            {v.x, v.y, v.z, -position.y},
+            {n.x, n.y, n.z, -position.z},
+            {0.0f, 0.0f, 0.0f, 1.0f}
+        };
+        return Matrix4(temp);
     }
 }

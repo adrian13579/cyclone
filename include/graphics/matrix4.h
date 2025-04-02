@@ -1,4 +1,5 @@
 #include "../cyclone/precision.h"
+#include "../cyclone/core.h"
 
 using namespace cyclone;
 
@@ -145,5 +146,7 @@ namespace graphics {
              * @return A Matrix4 for the perspective projection.
              */
             static Matrix4 PerspectiveProjection(radian fov, real aspcectRatio, real nearPlane, real farPlane);
+
+            static Matrix4 Camera(Vector3 position, Vector3 u, Vector3 v, Vector3 n);
     };
 }

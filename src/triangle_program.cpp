@@ -1,4 +1,3 @@
-#include "../include/cyclone/core.h"
 #include "../include/triangle_program.h"
 #include "../include/graphics/matrix4.h"
 

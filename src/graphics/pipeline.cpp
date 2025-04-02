@@ -37,8 +37,9 @@ const graphics::Matrix4* Pipeline::GetTrans() {
     graphics::Matrix4 perspectiveMatrix = graphics::Matrix4::PerspectiveProjection(m_fov, m_aspectRatio, m_nearPlane, m_farPlane);
     graphics::Matrix4 translationMatrix = graphics::Matrix4::Translation(m_worldPos.x, m_worldPos.y, m_worldPos.z);
 
-    m_transformation = perspectiveMatrix * translationMatrix * rotateMatrix * scaleMatrix;
-    //m_transformation = scaleMatrix * rotateMatrix * translationMatrix * perspectiveMatrix;
+    graphics::Matrix4 cameraMatrix = graphics::Matrix4::Camera(m_camera.position, m_camera.u, m_camera.v, m_camera.n);
+
+    m_transformation = perspectiveMatrix * cameraMatrix * translationMatrix * rotateMatrix * scaleMatrix;
 
     return &m_transformation;
 }
@@ -48,4 +49,16 @@ void Pipeline::SetPerspectiveProjection(float fov, float aspectRatio, float near
     m_aspectRatio = aspectRatio;
     m_nearPlane = nearPlane;
     m_farPlane = farPlane;
+}
+
+// TODO: Normalize the camera vectors
+void Pipeline::SetCamera(Vector3 position, Vector3 u, Vector3 v, Vector3 n) {
+    m_camera.position = position;
+    m_camera.u = u;
+    m_camera.v = v;
+    m_camera.n = n;
+}
+
+void Pipeline::SetCamera(Camera camera) {
+    m_camera = camera;
 }

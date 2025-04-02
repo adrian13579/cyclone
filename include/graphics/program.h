@@ -1,11 +1,6 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
-#include <cstdio>
-#include <cstring>
-#include <iostream>
 #include <string>
-#include <fstream>
-#include <sstream>
 #include <unordered_map>
 #include <vector>
 

@@ -65,6 +65,15 @@ void CubeProgram::Display() {
     }
     angle += delta;
 
+    m_pipeline->WorldPos(0, 0, 0);
+
+    Camera camera = {
+        cyclone::Vector3(-1, -1, -1),
+        cyclone::Vector3(1, 0, 0),
+        cyclone::Vector3(0, 1, 0),
+        cyclone::Vector3(0, 0, 1)
+    };
+    m_pipeline->SetCamera(camera);
     m_pipeline->Scale(0.5f, 0.5f, 0.5f);
     m_pipeline->Rotate(0, angle, 0);
     m_pipeline->SetPerspectiveProjection(to_radian(90), (float)m_width / (float)m_height, 0, 10);

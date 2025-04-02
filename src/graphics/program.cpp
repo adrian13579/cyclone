@@ -1,6 +1,10 @@
 #include "../../include/graphics/program.h"
 #include <cassert>
 #include <string>
+#include <iostream>
+#include <cstring>
+#include <sstream>
+#include <fstream>
 
 using namespace graphics;
 
