@@ -12,6 +12,7 @@ namespace demo {
 
             void CreateProgram() override;
             void Display() override;
+            void OnKeyboard(int key);
 
         protected:
             void CreateVertexBuffer() override;

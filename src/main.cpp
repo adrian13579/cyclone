@@ -39,12 +39,20 @@ void display() {
     return program.Display();
 }
 
+void onKeyboard(int key, int x, int y) {
+    program.OnKeyboard(key);
+}
+
 int main(int argc, char** argv) {
     initGlut(argc, argv);
 
     program.CreateProgram();
 
     glutDisplayFunc(display);
+
+    glutSpecialFunc(onKeyboard);
+    glutSpecialFunc(onKeyboard);
+
     glutMainLoop();
     return 0;
 }

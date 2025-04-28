@@ -1,9 +1,19 @@
 #include "../include/graphics/pipeline.h"
+#include <iostream>
 
 Pipeline::Pipeline() {
+
+    std::cout << "Pipeline constructor"<<std::endl;
     m_scale = cyclone::Vector3(1.0f, 1.0f, 1.0f);
     m_worldPos = cyclone::Vector3(0.0f, 0.0f, 0.0f);
     m_rotateInfo = cyclone::Vector3(0.0f, 0.0f, 0.0f);
+
+    m_camera = new Camera(); 
+    m_camera->SetPosition(cyclone::Vector3(1,0,0));
+    m_camera->SetTarget(cyclone::Vector3 (0, 0, 1));
+    m_camera->SetUp(cyclone::Vector3 (0,1, 0));
+    m_camera->SetSpeed(0.1f);
+    SetCamera(*m_camera);
 }
 
 void Pipeline::Scale(float scaleX, float scaleY, float scaleZ) {
@@ -37,7 +47,7 @@ const graphics::Matrix4* Pipeline::GetTrans() {
     graphics::Matrix4 perspectiveMatrix = graphics::Matrix4::PerspectiveProjection(m_fov, m_aspectRatio, m_nearPlane, m_farPlane);
     graphics::Matrix4 translationMatrix = graphics::Matrix4::Translation(m_worldPos.x, m_worldPos.y, m_worldPos.z);
 
-    graphics::Matrix4 cameraMatrix = graphics::Matrix4::Camera(m_camera.position, m_camera.u, m_camera.v, m_camera.n);
+    graphics::Matrix4 cameraMatrix = m_camera->GetViewMatrix();
 
     m_transformation = perspectiveMatrix * cameraMatrix * translationMatrix * rotateMatrix * scaleMatrix;
 
@@ -51,14 +61,10 @@ void Pipeline::SetPerspectiveProjection(float fov, float aspectRatio, float near
     m_farPlane = farPlane;
 }
 
-// TODO: Normalize the camera vectors
-void Pipeline::SetCamera(Vector3 position, Vector3 u, Vector3 v, Vector3 n) {
-    m_camera.position = position;
-    m_camera.u = u;
-    m_camera.v = v;
-    m_camera.n = n;
+void Pipeline::SetCamera(const Camera& camera) {
+    *m_camera = camera;
 }
 
-void Pipeline::SetCamera(Camera camera) {
-    m_camera = camera;
+Camera* Pipeline::GetCamera() {
+    return m_camera;
 }

@@ -1,8 +1,9 @@
 #include "../include/cube_program.h"
+#include <iostream>
 
 using namespace demo;
 
-CubeProgram::CubeProgram() { }
+CubeProgram::CubeProgram() { std::cout<<"CubeProgram constructor"<<std::endl; }
 
 CubeProgram::~CubeProgram() {}
 
@@ -11,6 +12,8 @@ void CubeProgram::CreateProgram() {
     AddShader("src/shaders/cube.vert", GL_VERTEX_SHADER);
     AddShader("src/shaders/cube.frag", GL_FRAGMENT_SHADER);
     CompileShaders();
+
+    std::cout<<"CubeProgram::CreateProgram()"<<std::endl;
 }
 
 void CubeProgram::CreateVertexBuffer() {
@@ -49,6 +52,11 @@ void CubeProgram::CreateVertexBuffer() {
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), &indices, GL_STATIC_DRAW);
 }
 
+void CubeProgram::OnKeyboard(int key) {
+    std::cout << "key: " << key << std::endl;
+    m_pipeline->GetCamera()->OnKeyboard(key);
+}
+
 
 void CubeProgram::Display() {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -67,13 +75,6 @@ void CubeProgram::Display() {
 
     m_pipeline->WorldPos(0, 0, 0);
 
-    Camera camera = {
-        cyclone::Vector3(-1, -1, -1),
-        cyclone::Vector3(1, 0, 0),
-        cyclone::Vector3(0, 1, 0),
-        cyclone::Vector3(0, 0, 1)
-    };
-    m_pipeline->SetCamera(camera);
     m_pipeline->Scale(0.5f, 0.5f, 0.5f);
     m_pipeline->Rotate(0, angle, 0);
     m_pipeline->SetPerspectiveProjection(to_radian(90), (float)m_width / (float)m_height, 0, 10);
