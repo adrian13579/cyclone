@@ -4,6 +4,7 @@ class Pipeline
 {
     public:
        Pipeline(); 
+       ~Pipeline();
        void Scale(float scaleX, float scaleY, float scaleZ); 
        void WorldPos(float x, float y, float z); 
        void Rotate(radian rotateX, radian rotateY, radian rotateZ);

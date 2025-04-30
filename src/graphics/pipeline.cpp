@@ -16,6 +16,12 @@ Pipeline::Pipeline() {
     SetCamera(*m_camera);
 }
 
+Pipeline::~Pipeline() {
+    if(m_camera != nullptr) {
+        delete m_camera;
+    }
+}
+
 void Pipeline::Scale(float scaleX, float scaleY, float scaleZ) {
     m_scale.x = scaleX;
     m_scale.y = scaleY;
@@ -62,7 +68,10 @@ void Pipeline::SetPerspectiveProjection(float fov, float aspectRatio, float near
 }
 
 void Pipeline::SetCamera(const Camera& camera) {
-    *m_camera = camera;
+    if(m_camera != nullptr) {
+        delete m_camera;
+    }
+    m_camera = new Camera(camera);
 }
 
 Camera* Pipeline::GetCamera() {
