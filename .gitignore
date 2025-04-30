@@ -34,3 +34,4 @@ cyclone
 
 build/
 *.cache/
+src/graphics/cyclone.code-workspace

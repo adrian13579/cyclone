@@ -2,7 +2,10 @@
 CXX = g++
 
 # Compiler flags
-CXXFLAGS = -Wall -std=c++11
+CXXFLAGS = -Wall -std=c++11 -g
+
+# Linker flags
+LDFLAGS = -g
 
 # Include directories
 INCLUDES = -I./include 
@@ -21,7 +24,7 @@ all: $(EXEC)
 
 # Link the executable
 $(EXEC): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $^ -lglut -lGLEW -lGL 
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $^ -lglut -lGLEW -lGL 
 
 # Compile source files into object files
 %.o: %.cpp
